@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TemplateSchema"
+    targetNamespace="AmbuCheckPrototype"
+    elementFormDefault="qualified"
+    xmlns="AmbuCheckPrototype"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="checklist">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="section"  minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+              <xs:choice>
+                <xs:element name="subsection" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                      <xs:choice>
+                        <xs:element name="checkbox" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="textbox" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                      </xs:choice>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="checkbox" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="textbox" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:choice>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="checkbox" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="textbox" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:choice>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

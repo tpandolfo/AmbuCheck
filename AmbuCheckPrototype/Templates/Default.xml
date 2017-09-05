@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<checklist name="Default"
+           xmlns="AmbuCheckPrototype"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="AmbuCheckPrototype ..\TemplateSchema.xsd"
+           >
+  <section>
+    <title>Cab Interior</title>
+    <checkbox>ERG Book</checkbox>
+    <checkbox>Binder</checkbox>
+    <checkbox>    Registration*</checkbox>
+    <checkbox>    Insurance*</checkbox>
+    <checkbox>    Directions to Hospital</checkbox>
+    <checkbox>Gate Keys (driver door)</checkbox>
+    <checkbox>Reflective Coats/Vests (2)</checkbox>
+    <checkbox>Monroe County Map (1)</checkbox>
+    <checkbox>Perinton Map (1)</checkbox>
+    <checkbox>Binoculars (1)</checkbox>
+  </section>
+</checklist>

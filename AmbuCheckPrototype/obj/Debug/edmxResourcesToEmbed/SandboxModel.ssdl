@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SandboxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ambulances">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ambulanceNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="CheckTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="checkType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ReportData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reportId" Type="int" Nullable="false" />
+    <Property Name="checkTypeId" Type="int" Nullable="false" />
+    <Property Name="checkKey" Type="varchar" MaxLength="50" />
+    <Property Name="checkBool" Type="bit" />
+    <Property Name="checkString" Type="varchar" MaxLength="50" />
+    <Property Name="checkParent" Type="varchar" MaxLength="50" />
+    <Property Name="checkGrandparent" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateTime" Type="datetime" />
+    <Property Name="ambulanceId" Type="int" Nullable="false" />
+    <Property Name="crew1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="crew2" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_ReportData_CheckTypes">
+    <End Role="CheckTypes" Type="Self.CheckTypes" Multiplicity="1" />
+    <End Role="ReportData" Type="Self.ReportData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CheckTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ReportData">
+        <PropertyRef Name="checkTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReportData_Reports">
+    <End Role="Reports" Type="Self.Reports" Multiplicity="1" />
+    <End Role="ReportData" Type="Self.ReportData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reports">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ReportData">
+        <PropertyRef Name="reportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reports_Ambulances">
+    <End Role="Ambulances" Type="Self.Ambulances" Multiplicity="1" />
+    <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ambulances">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Reports">
+        <PropertyRef Name="ambulanceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SandboxModelStoreContainer">
+    <EntitySet Name="Ambulances" EntityType="Self.Ambulances" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckTypes" EntityType="Self.CheckTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReportData" EntityType="Self.ReportData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ReportData_CheckTypes" Association="Self.FK_ReportData_CheckTypes">
+      <End Role="CheckTypes" EntitySet="CheckTypes" />
+      <End Role="ReportData" EntitySet="ReportData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReportData_Reports" Association="Self.FK_ReportData_Reports">
+      <End Role="Reports" EntitySet="Reports" />
+      <End Role="ReportData" EntitySet="ReportData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reports_Ambulances" Association="Self.FK_Reports_Ambulances">
+      <End Role="Ambulances" EntitySet="Ambulances" />
+      <End Role="Reports" EntitySet="Reports" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea4af78bfe13479994954fb3aa435c9a" Name="Diagram1" >
+        <EntityTypeShape EntityType="SandboxModel.Ambulance" Width="1.5" PointX="9" PointY="2.375" />
+        <EntityTypeShape EntityType="SandboxModel.Report" Width="1.5" PointX="6.625" PointY="2.375" />
+        <AssociationConnector Association="SandboxModel.FK_Reports_Reports" />
+        <EntityTypeShape EntityType="SandboxModel.CheckType" Width="1.5" PointX="6.625" PointY="5.875" />
+        <EntityTypeShape EntityType="SandboxModel.ReportData" Width="1.5" PointX="8.875" PointY="5.125" />
+        <AssociationConnector Association="SandboxModel.FK_Reports_Ambulances" />
+        <AssociationConnector Association="SandboxModel.FK_ReportData_CheckTypes" />
+        <AssociationConnector Association="SandboxModel.FK_ReportData_Reports" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SandboxModelStoreContainer" CdmEntityContainer="SandboxEntities">
+    <EntitySetMapping Name="Ambulances">
+      <EntityTypeMapping TypeName="SandboxModel.Ambulance">
+        <MappingFragment StoreEntitySet="Ambulances">
+          <ScalarProperty Name="ambulanceNumber" ColumnName="ambulanceNumber" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="SandboxModel.Report">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="ambulanceId" ColumnName="ambulanceId" />
+          <ScalarProperty Name="crew2" ColumnName="crew2" />
+          <ScalarProperty Name="crew1" ColumnName="crew1" />
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CheckTypes">
+      <EntityTypeMapping TypeName="SandboxModel.CheckType">
+        <MappingFragment StoreEntitySet="CheckTypes">
+          <ScalarProperty Name="checkType1" ColumnName="checkType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportDatas">
+      <EntityTypeMapping TypeName="SandboxModel.ReportData">
+        <MappingFragment StoreEntitySet="ReportData">
+          <ScalarProperty Name="checkGrandparent" ColumnName="checkGrandparent" />
+          <ScalarProperty Name="checkParent" ColumnName="checkParent" />
+          <ScalarProperty Name="checkString" ColumnName="checkString" />
+          <ScalarProperty Name="checkBool" ColumnName="checkBool" />
+          <ScalarProperty Name="checkKey" ColumnName="checkKey" />
+          <ScalarProperty Name="checkTypeId" ColumnName="checkTypeId" />
+          <ScalarProperty Name="reportId" ColumnName="reportId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

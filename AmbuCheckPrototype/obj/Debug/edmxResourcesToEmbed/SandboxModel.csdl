@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SandboxModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SandboxEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ambulances" EntityType="SandboxModel.Ambulance" />
+    <EntitySet Name="Reports" EntityType="SandboxModel.Report" />
+    <AssociationSet Name="FK_Reports_Reports" Association="SandboxModel.FK_Reports_Reports">
+      <End Role="Report" EntitySet="Reports" />
+      <End Role="Report1" EntitySet="Reports" />
+    </AssociationSet>
+    <EntitySet Name="CheckTypes" EntityType="SandboxModel.CheckType" />
+    <EntitySet Name="ReportDatas" EntityType="SandboxModel.ReportData" />
+    <AssociationSet Name="FK_Reports_Ambulances" Association="SandboxModel.FK_Reports_Ambulances">
+      <End Role="Ambulance" EntitySet="Ambulances" />
+      <End Role="Report" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReportData_CheckTypes" Association="SandboxModel.FK_ReportData_CheckTypes">
+      <End Role="CheckType" EntitySet="CheckTypes" />
+      <End Role="ReportData" EntitySet="ReportDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReportData_Reports" Association="SandboxModel.FK_ReportData_Reports">
+      <End Role="Report" EntitySet="Reports" />
+      <End Role="ReportData" EntitySet="ReportDatas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Ambulance">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ambulanceNumber" Type="Int32" />
+    <NavigationProperty Name="Reports" Relationship="SandboxModel.FK_Reports_Ambulances" FromRole="Ambulance" ToRole="Report" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dateTime" Type="DateTime" Precision="3" />
+    <Property Name="crew1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="crew2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ambulanceId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ambulance" Relationship="SandboxModel.FK_Reports_Ambulances" FromRole="Report" ToRole="Ambulance" />
+    <NavigationProperty Name="ReportDatas" Relationship="SandboxModel.FK_ReportData_Reports" FromRole="Report" ToRole="ReportData" />
+  </EntityType>
+  <Association Name="FK_Reports_Reports">
+    <End Type="SandboxModel.Report" Role="Report" Multiplicity="1" />
+    <End Type="SandboxModel.Report" Role="Report1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Report">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Report1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CheckType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="checkType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ReportDatas" Relationship="SandboxModel.FK_ReportData_CheckTypes" FromRole="CheckType" ToRole="ReportData" />
+  </EntityType>
+  <EntityType Name="ReportData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reportId" Type="Int32" Nullable="false" />
+    <Property Name="checkTypeId" Type="Int32" Nullable="false" />
+    <Property Name="checkKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="checkBool" Type="Boolean" />
+    <Property Name="checkString" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="checkParent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="checkGrandparent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CheckType" Relationship="SandboxModel.FK_ReportData_CheckTypes" FromRole="ReportData" ToRole="CheckType" />
+    <NavigationProperty Name="Report" Relationship="SandboxModel.FK_ReportData_Reports" FromRole="ReportData" ToRole="Report" />
+  </EntityType>
+  <Association Name="FK_Reports_Ambulances">
+    <End Type="SandboxModel.Ambulance" Role="Ambulance" Multiplicity="1" />
+    <End Type="SandboxModel.Report" Role="Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ambulance">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="ambulanceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReportData_CheckTypes">
+    <End Type="SandboxModel.CheckType" Role="CheckType" Multiplicity="1" />
+    <End Type="SandboxModel.ReportData" Role="ReportData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CheckType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ReportData">
+        <PropertyRef Name="checkTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReportData_Reports">
+    <End Type="SandboxModel.Report" Role="Report" Multiplicity="1" />
+    <End Type="SandboxModel.ReportData" Role="ReportData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Report">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ReportData">
+        <PropertyRef Name="reportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
